@@ -48,7 +48,7 @@ def do_train(args, model, train_dataloader, save_dir="./out"):
     model.to(device)
     
     for epoch in range(num_epochs):
-        for batch in tqdm(eval_dataloader):
+        for batch in train_dataloader:
             optimizer.zero_grad()
             
             batch = {k: v.to(device) for k, v in batch.items()}
@@ -57,9 +57,9 @@ def do_train(args, model, train_dataloader, save_dir="./out"):
 
             loss.backward()
             optimizer.step()
-            lr_scheduler.step()
-            
             progress_bar.update(1)
+
+        lr_scheduler.step()
         
     ##### YOUR CODE ENDS HERE ######
 
