@@ -57,9 +57,9 @@ def do_train(args, model, train_dataloader, save_dir="./out"):
 
             loss.backward()
             optimizer.step()
+            lr_scheduler.step()
+            
             progress_bar.update(1)
-
-        lr_scheduler.step()
         
     ##### YOUR CODE ENDS HERE ######
 
