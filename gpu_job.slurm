@@ -11,7 +11,7 @@
 #SBATCH --requeue
 
 
-singularity exec --bind /scratch --nv --overlay /scratch/zf2345/overlay-25GB-500K.ext3:rw /scratch/zf2345/cuda11.7.99-cudnn8.5-devel-ubuntu22.04.2.sif /bin/bash -c "
+singularity exec --bind /scratch --nv --overlay /scratch/zf2345/overlay-25GB-500K.ext3:rw /scratch/zf2345/cuda11.8.86-cudnn8.7-devel-ubuntu22.04.2.sif /bin/bash -c "
 source /ext3/miniconda3/etc/profile.d/conda.sh
 conda activate hw3-nlp
 python3 main.py --train --eval --debug train
