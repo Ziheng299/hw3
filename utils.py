@@ -84,9 +84,9 @@ def custom_transform(example):
     synonym_prob = 0.2
     emphasis_prob = 0.15
 
-    words = synonym_replacement(words)
-    words = typos(words)
-    words = add_emphasis_words(words)
+    words = synonym_replacement(words, synonym_prob)
+    words = typos(words, typo_prob)
+    words = add_emphasis_words(words, emphasis_prob)
 
     example["text"] = TreebankWordDetokenizer().detokenize(words)
     ##### YOUR CODE ENDS HERE ######
