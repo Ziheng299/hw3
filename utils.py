@@ -10,7 +10,7 @@ from tqdm.auto import tqdm
 import evaluate
 import random
 import argparse
-import nltk
+# import nltk
 from nltk.corpus import wordnet
 from nltk import word_tokenize
 from nltk.tokenize.treebank import TreebankWordDetokenizer
@@ -59,6 +59,7 @@ def synonym_replacement(words, synonym_prob):
                 words[i] = random.choice(list(synonyms))
     return words
 
+'''
 # Adding emphasis words before adjectives or adverbs
 def add_emphasis_words(words, emphasis_prob):
     emphasis_words = ["really", "very", "quite", "extremely", "super"]
@@ -69,7 +70,8 @@ def add_emphasis_words(words, emphasis_prob):
                 emphasis = random.choice(emphasis_words)
                 words[i] = emphasis + " " + word
     return words
-    
+'''
+
 def custom_transform(example):
     ################################
     ##### YOUR CODE BEGINGS HERE ###
@@ -83,11 +85,11 @@ def custom_transform(example):
 
     typo_prob = 0.25
     synonym_prob = 0.2
-    emphasis_prob = 0.15
+    # emphasis_prob = 0.15
 
     words = synonym_replacement(words, synonym_prob)
     words = typos(words, typo_prob)
-    words = add_emphasis_words(words, emphasis_prob)
+    # words = add_emphasis_words(words, emphasis_prob)
 
     example["text"] = TreebankWordDetokenizer().detokenize(words)
     ##### YOUR CODE ENDS HERE ######
