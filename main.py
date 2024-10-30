@@ -111,15 +111,16 @@ def create_augmented_dataloader(args, dataset):
     transformed_dataset = dataset.map(custom_transform, load_from_cache_file=False)
 
     tokenized_dataset = dataset["train"].map(tokenize_function, batched=True)
-    transformed_tokenized_dataset = transformed_dataset.map(tokenize_function, batched=True, load_from_cache_file=False)
-
     tokenized_dataset = tokenized_dataset.remove_columns(["text"]).rename_column("label", "labels")
+    
+    transformed_tokenized_dataset = transformed_dataset.map(tokenize_function, batched=True, load_from_cache_file=False)
     transformed_tokenized_dataset = transformed_tokenized_dataset.remove_columns(["text"]).rename_column("label", "labels")
 
-    augmented_dataset = datasets.concatenate_datasets([tokenized_original_dataset, tokenized_transformed_dataset])
+    augmented_dataset = datasets.concatenate_datasets([tokenized_dataset, transformed_tokenized_dataset])
 
     augmented_dataset.set_format("torch")
     train_dataloader = DataLoader(augmented_dataset, batch_size=args.batch_size)
+    ##### YOUR CODE ENDS HERE ######
 
     return train_dataloader
 
